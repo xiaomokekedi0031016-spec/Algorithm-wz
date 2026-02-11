@@ -38,6 +38,7 @@ public:
                 //cout << "*****" << endl;
                 // 消除的时候，记录一下被谁消除了
                 ans[t.top()] = i;
+				cout << t.top() << "被" << i << "消除" << endl;
                 // 消除时候，值更大的需要从栈中消失
                 t.pop();
             }
@@ -131,9 +132,9 @@ public:
     }
 };
 
-int main() {
+int main03() {
 	//Solution
-	vector<int> A = { 4, 6 ,9, 5, 2, 0, 8};
+	vector<int> A = {73,72,71,74};
 	Solution sol;
 	vector<int> res = sol.findRightLarge(A);
 	for (int index : res) {
