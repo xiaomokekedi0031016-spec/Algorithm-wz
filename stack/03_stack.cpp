@@ -158,7 +158,7 @@ int main03() {
 	//cout << "栈顶元素:" << stk.top() << endl;
 
     //Solution1
-	vector<int> B = { 2, 6, 9, 5, 4 };//最后的单调栈是递增(底到顶)的 >> 剩下的元素没有比它们小的元素
+	vector<int> B = { 2, 5,3 ,6 };//最后的单调栈是递增(底到顶)的 >> 剩下的元素没有比它们小的元素
     Solution1 sol1;
     vector<int> res1 = sol1.findRightSmall(B);
     for (int index : res1) {

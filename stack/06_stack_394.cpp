@@ -99,7 +99,7 @@ public:
     }
 };
 
-int main() {
+int main06() {
 	Solution sol;
 	string s = "3[a2[c]b]";
 	string res = sol.decodeString(s);
