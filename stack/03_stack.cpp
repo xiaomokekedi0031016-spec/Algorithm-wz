@@ -38,7 +38,7 @@ public:
                 //cout << "*****" << endl;
                 // 消除的时候，记录一下被谁消除了
                 ans[t.top()] = i;
-				cout << t.top() << "被" << i << "消除" << endl;
+				//cout << t.top() << "被" << i << "消除" << endl;
                 // 消除时候，值更大的需要从栈中消失
                 t.pop();
             }
@@ -47,9 +47,12 @@ public:
         }
         // 栈中剩下的元素，由于没有人能消除他们，因此，只能将结果设置为-1。
         while (!t.empty()) {
+			cout << "单调栈的元素:" << A[t.top()] << " ";
             ans[t.top()] = -1;
             t.pop();
         }
+
+        cout << endl;
 
         return ans;
     }
@@ -73,9 +76,11 @@ public:
 			t.push(i);
         }
         while(!t.empty()) {
+            cout << "单调栈的元素:" << B[t.top()] << " ";
             ans[t.top()] = -1;
             t.pop();
 		}   
+        cout << endl;
 		return ans;
     }
 };
@@ -98,9 +103,11 @@ public:
 			t.push(i);
         }
         while (!t.empty()) {
+            cout << "单调栈的元素:" << C[t.top()] << " ";
             ans[t.top()] = -1;
             t.pop();
         }
+        cout << endl;
         return ans;
 
     }
@@ -124,9 +131,11 @@ public:
             t.push(i);
         }
         while (!t.empty()) {
+            cout << "单调栈的元素:" << D[t.top()] << " ";
             ans[t.top()] = -1;
             t.pop();
         }
+        cout << endl;
         return ans;
 
     }
@@ -134,7 +143,7 @@ public:
 
 int main03() {
 	//Solution
-	vector<int> A = {73,72,71,74};
+	vector<int> A = { 4, 6, 9, 5, 2 };//最后的单调栈是递减的 >> 剩下的元素没有比它们大的元素
 	Solution sol;
 	vector<int> res = sol.findRightLarge(A);
 	for (int index : res) {
@@ -142,13 +151,14 @@ int main03() {
 	}
 	cout << endl;
 
+
     //stack<int> stk;
 	//stk.push(10);
 	//stk.push(20);
 	//cout << "栈顶元素:" << stk.top() << endl;
 
     //Solution1
-    vector<int> B = { 1, 2 ,4, 9, 4, 0, 5 };
+	vector<int> B = { 2, 6, 9, 5, 4 };//最后的单调栈是递增(底到顶)的 >> 剩下的元素没有比它们小的元素
     Solution1 sol1;
     vector<int> res1 = sol1.findRightSmall(B);
     for (int index : res1) {
@@ -157,7 +167,7 @@ int main03() {
     cout << endl;
 
     //Solution2
-    vector<int> C = { 4, 6 ,9, 5, 2, 8};
+	vector<int> C = { 4, 6, 9, 5, 2 };//最后的单调栈是递减的
     Solution2 sol2;
     vector<int> res2 = sol2.findLeftLarge(C);
     for (int index : res2) {
@@ -166,7 +176,7 @@ int main03() {
     cout << endl;
 
     //Solution3
-    vector<int> D = { 4, 6 ,9, 5, 2, 8 };
+    vector<int> D = { 4, 6, 9, 5 ,2 };//最后的单调栈是递增(底到顶)的
     Solution3 sol3;
     vector<int> res3 = sol3.findLeftSmall(C);
     for (int index : res3) {

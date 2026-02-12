@@ -55,6 +55,7 @@ public:
                 nums.pop();
                 for (int j = 0; j < times; ++j)
                     strs.top() += res;
+				cout << "strs.top(): " << strs.top() << endl;
                 res = strs.top(); //之后若还是字母，就会直接加到res之后，因为它们是同一级的运算
                 //若是左括号，res会被压入strs栈，作为上一层的运算
                 strs.pop();
@@ -98,9 +99,9 @@ public:
     }
 };
 
-int main06() {
+int main() {
 	Solution sol;
-	string s = "3[a2[c]]";
+	string s = "3[a2[c]b]";
 	string res = sol.decodeString(s);
 
 	cout << "res: " << res << endl;	

@@ -20,6 +20,7 @@ public:
 			
 			bool hasEat = false;
 
+			//当前鱼向左游动，栈顶鱼向右游动，则发生相遇 >> 如果栈顶鱼大于当前鱼，则当前鱼被吃掉，结束循环，否则栈顶鱼被吃掉，继续循环
 			while (!stk.empty() && Dir[stk.top()] == right && currentFishDir == left) {
 				if (Size[stk.top()] > currentFishSize) {
 					hasEat = true;
@@ -37,7 +38,8 @@ public:
 
 int main02() {
 	//Solution
-	std::vector<int> Size = { 4,3,2,1,5 };
+	//std::vector<int> Size = { 4,3,2,1,5 };
+	std::vector<int> Size = { 4,3,4,1,5 };
 	std::vector<int> Dir = { 0,1,0,0,0 };
 	Solution sol;
 	int count = sol.solution(Size, Dir);

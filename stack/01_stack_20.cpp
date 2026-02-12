@@ -108,7 +108,7 @@ public:
         };
 		std::stack<char> stk;
         for (char c : s) {
-            if (paren_map.count(c)) {
+			if (paren_map.count(c)) {//判断c是否是右括号 >> 存在返回1,不存在返回0
                 if (stk.empty() || stk.top() != paren_map[c]) {
                     return false;
                 }
