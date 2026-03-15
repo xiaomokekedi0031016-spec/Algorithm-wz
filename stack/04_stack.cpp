@@ -1,63 +1,92 @@
-/*
-	求一组数的最小序列 >> 从左往右找最小的数且要满足一定条件
-	保证前面的数尽量小，但还要保证后面还能凑够 k 个数
-*/
-
+#if 1
+//1、Valid Parentheses
+#include <string>
 #include <iostream>
-#include <vector>
 #include <stack>
+#include <unordered_map>
 using namespace std;
 
+//栈+一堆if else
 class Solution {
 public:
-	vector<int> findSmallSeq(const vector<int>& nums, int k){
-		if (nums.empty()) {
-			return {};
+    bool isValid(string s) {
+		stack<char> stk;
+        if(s.size() % 2 != 0) {
+            return false;
 		}
-		vector<int> ans(k);//初始化vector大小为k,值为0
-		stack<int> s;
-		for (int i = 0; i < nums.size(); ++i) {
-			const int x = nums[i];
-			//提取k个数，所以要保留k个数
-			//left表示还剩多少个数没有处理
-			const int left = nums.size() - i;
-			while (!s.empty() && ((int)s.size()) + left > k && s.top() > x) {
-				s.pop();
+        for (const auto& c : s) {
+            if (c == '(') {
+                stk.push(')');
+            }
+            else if(c == '[') {
+				stk.push(']');
 			}
-			s.push(x);
-		}
-		while ((int)s.size() > k) {
-			s.pop();
-		}
-		// 把k个元素取出来，注意这里取的顺序!
-		for (int i = k - 1; i >= 0; i--) {
-			ans[i] = s.top();
-			s.pop();
-		}
-
-		return ans;
-	}
+            else if (c == '{') {
+                stk.push('}');
+            }
+            else if(!stk.empty() && c == stk.top()) {
+                stk.pop();
+            }
+            else {
+                return false;
+            }
+        }
+        //return true;//err
+		return stk.empty();//如果栈不空，说明有未匹配的左括号
+    }
 };
 
+/*
+    std::unordered_map<int, std::string> dict = {{1, "one"}, {2, "two"}};
+    dict.insert({3, "three"});
+    dict.insert(std::make_pair(4, "four"));
+    dict.insert({{4, "another four"}, {5, "five"}});
+*/
 
-int main04() {
-	//Solution
-	Solution sol;
-	vector<int> A = sol.findSmallSeq({ 3,5,2,6 }, 2);
-	cout << "{";
-	for (int i = 0; i < A.size(); ++i)
-	{
-		cout << A[i];
-		if (i != A.size() - 1)
-			cout << ",";
-	}
-	cout << "}";
+//栈+哈希表
+class Solution2 {
+public:
+    bool isValid(string s) {
+        if (s.size() % 2 != 0) {
+            return false;
+        }
+		stack<char> stk;
+        unordered_map<char, char> paren_map = {
+            {')', '('},
+            {'}', '{'},
+            {']', '['}
+		};
+        for (const auto& c : s) {
+            if (paren_map.count(c)) {
+                if (stk.empty() || stk.top() != paren_map[c]) {
+                    return false;
+				}
+                stk.pop();
+            }
+            else {
+				stk.push(c);
+            }
+        }
+        //return true;//err
+        return stk.empty();
+    }
+};
 
-	//vector<int> v(3);
-	//for (vector<int>::iterator it = v.begin(); it != v.end(); it++)
-	//{
-	//	cout << *it << " ";
-	//}
-	//cout << endl;
-	return 0;
-}
+int main() {
+    string s1 = "()[]{}";
+    string s2 = "((";
+
+    Solution sol1;
+    bool result1 = sol1.isValid(s1);
+    bool result2 = sol1.isValid(s2);
+	std::cout << "result:" << result1 << std::endl;
+    std::cout << "result:" << result2 << std::endl;
+
+    Solution2 sol2;
+    bool result3 = sol2.isValid(s1);
+    std::cout << "result:" << result3 << std::endl;
+
+    return 0;
+}   
+
+#endif
