@@ -1,4 +1,4 @@
-#if 1
+#if 0
 //1¡¢Valid Parentheses
 #include <string>
 #include <iostream>
