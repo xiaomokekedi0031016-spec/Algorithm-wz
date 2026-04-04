@@ -10,6 +10,8 @@ using namespace std;
 class Solution {
 public:
     string minWindow(string s, string t) {
+		//countT	存储 t 中每个字符需要的数量
+		//window	存储当前滑动窗口里每个字符的数量
 		unordered_map<char, int> countT, window;
 		for (char c : t) {//统计t中每个字符的数量
 			countT[c]++;
